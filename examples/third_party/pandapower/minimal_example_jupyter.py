@@ -1,23 +1,47 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo",
+#     "pandas==2.2.3",
+#     "pandapower==3.2.1",
+#     "numba==0.62.1"
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.17.7"
 app = marimo.App()
 
+with app.setup:
+    # Initialization code that runs before all other cells
+    import marimo as mo
+
+    import pandas as pd
+    # Ignore pandas downcasting warnings
+    pd.set_option('future.no_silent_downcasting', True)
+    # Ignore pandas future warnings about copy-on-write
+    # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#evaluation-order-matters
+    #pd.options.mode.chained_assignment = None  # default='warn'
+    import warnings
+    warnings.filterwarnings(action='ignore', category=FutureWarning, module='pandas.*')
+
 
 @app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    # Minimal Example pandapower
+def _():
+    mo.vstack([
+        mo.md(r"""
+        # Minimal Example pandapower
 
+        ## Creating a Power System
 
-    ## Creating a Power System
-
-    We consider the following simple 3-bus example network as a minimal example:
-
-    <img src="pics/3bus-system.png" width="50%">
-
-    The above network can be created in pandapower as follows:
-    """)
+        We consider the following simple 3-bus example network as a minimal example:
+        """),
+        mo.image(src="./pics/3bus-system.png", width="50%"),
+        mo.md(r"""
+        The above network can be created in pandapower as follows:
+        """)
+    ])
     return
 
 
@@ -44,7 +68,7 @@ def _():
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ## Data Structure
 
@@ -78,7 +102,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     Note that line and transformer are created with standard types, so thath the electric parameters of are automatically filled in from the standard type library.
     """)
@@ -86,7 +110,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ## Power Flow
 
@@ -102,7 +126,7 @@ def _(net, pp):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     And check out at the results for buses, lines an transformers:
     """)
@@ -128,7 +152,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ### Tap Changers
 
@@ -145,7 +169,7 @@ def _(net, pp, trafo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     Looking at the results shows that bus voltages at the low voltage side of the transformer have increased:
     """)
@@ -159,7 +183,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ### Switches
 
@@ -175,17 +199,18 @@ def _(bus3, line, net, pp):
 
 
 @app.cell(hide_code=True)
-def _(mo):
-    mo.md(r"""
-    The open switch cuts the load bus from power supply:
-
-    <img src="pics/3bus-system_switch.png" width="8%">
-    """)
+def _():
+    mo.vstack([
+        mo.md(r"""
+        The open switch cuts the load bus from power supply:
+        """),
+        mo.image(src="./pics/3bus-system_switch.png", width="8%"),
+    ])
     return
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     This can be verified by running a power flow and inspecting the results. The voltage at bus 2 is given as NaN:
     """)
@@ -200,7 +225,7 @@ def _(net, pp):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     The load does not feed in:
     """)
@@ -214,7 +239,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     And the line is in open loop operation:
     """)
@@ -228,7 +253,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ## Topological Analysis
 
@@ -245,7 +270,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     The package correctly determines that bus 2 is cut from power supply. When we close the switch, there are no unsupplied buses anymore:
     """)
@@ -260,7 +285,7 @@ def _(net, top):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     Apart from predefined search functions, it is also possible to translate the pandapower network into a NetworkX graph and run searches directly on that graph.
 
@@ -276,7 +301,7 @@ def _(net, top):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     And search for all buses that are connected to the load bus in that graph:
     """)
@@ -290,7 +315,7 @@ def _(mg, top):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     The graph search finds all buses that are on the same voltage level. Searches like these can be used for feeder identification and many more applications.
     """)
@@ -298,7 +323,7 @@ def _(mo):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     ## Short Circuit Analysis
 
@@ -315,7 +340,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     Now we can calculate short circuits. Here, we calculate a three phase short circuit current with a fault impedance of 2 Ohms:
     """)
@@ -330,7 +355,7 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     Initial and peak short circuit currents are given for faults at all buses:
     """)
@@ -344,18 +369,12 @@ def _(net):
 
 
 @app.cell(hide_code=True)
-def _(mo):
+def _():
     mo.md(r"""
     This concludes a short walkthrough of some pandapower features. More in-depth tutorials can be found in the pandapower documentation:
     https://www.pandapower.org/start/#interactive-tutorials-
     """)
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-    return (mo,)
 
 
 if __name__ == "__main__":
