@@ -4,6 +4,12 @@
 I'm learned pandapower using their interactive Jupyter notebook tutorials.
 I never liked Jupyter notebooks because they're not reproducible (you can run cells in an arbitary order) so I was quite glad when I found marimo.
 
+# The problem
+
+[Varible mutations are not tracked](https://docs.marimo.io/guides/reactivity/#variable-mutations-are-not-tracked)
+
+[Execution Order](https://docs.marimo.io/getting_started/key_concepts/#editing-notebooks)
+
 
 ## 1st Method - marimo convert
 I ran the marimo converter for the original [minimal example from pandapower](https://github.com/e2nIEE/pandapower/blob/7b6b2bf058525143ff590f57d0e8dce0fcef3f66/tutorials/minimal_example.ipynb):
@@ -31,5 +37,14 @@ This can become quite confusing (see `net_switches_created` and `net_switches_po
 But worse, this is not the normal usage for a `net` object in pandapower, where it should be mutated.
 So you would learn contra to the best practices for the pandapower package.
 
-For this version see: `minimap_example_redefining.py`
+For this version see: `[minimap_example_redefining.py](https://github.com/4x4Robots/marimo/blob/7a818a73bc5bb96e320620ad92d5f6bda9102638/examples/third_party/pandapower/minimal_example_redefining_variables.py)`
+
+## 3rd Method - manual DAG
+
+When digging deeper into the [marimo documentation] there is a mention to manually define your DAG.
+
+[Best practices -> Minimize mutations](https://docs.marimo.io/guides/best_practices/)
+
+[Marimo Docs -> Why I can't redefine variables](https://docs.marimo.io/guides/understanding_errors/multiple_definitions/#why-cant-i-redefine-variables)
+
 
