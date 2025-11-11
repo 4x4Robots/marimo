@@ -11,3 +11,10 @@ marimo convert
 ```
 
 
+
+The direct conversion is bad because all net operations are mutating the `net` object. In the marimo philosophy this is forbidden (see ... for more information).
+
+Here is a short video demonstrating this hidden state, when starting the notebook it runs in one order, but by manually rerunning specific cells you can change their output, because the `net` object is changed in other cells.
+
+<video width="600" height="630" src="https://github.com/4x4Robots/marimo/blob/e05c5b0e635f51f9d1e64698f99b87196de657c4/examples/third_party/pandapower/public/Demonstation_Hidden_State_Mutating_Net.mp4"></video>
+

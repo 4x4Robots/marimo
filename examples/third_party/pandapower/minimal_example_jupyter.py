@@ -124,7 +124,7 @@ def _():
 
 @app.cell
 def _(net, pp):
-    pp.runpp(net)
+    pp.runpp(net)  # FORBIDDEN: mutating net
     return
 
 
@@ -166,8 +166,8 @@ def _():
 
 @app.cell
 def _(net, pp, trafo):
-    net.trafo.tap_pos.at[trafo] = -1
-    pp.runpp(net)
+    net.trafo.tap_pos.at[trafo] = -1  # FORBIDDEN: mutating net
+    pp.runpp(net)  # FORBIDDEN: mutating net
     return
 
 
@@ -197,7 +197,7 @@ def _():
 
 @app.cell
 def _(bus3, line, net, pp):
-    pp.create_switch(net, bus=bus3, element=line, et="l", closed=False)
+    pp.create_switch(net, bus=bus3, element=line, et="l", closed=False)  # FORBIDDEN: mutating net
     return
 
 
@@ -224,7 +224,7 @@ def _():
 
 @app.cell
 def _(net, pp):
-    pp.runpp(net)
+    pp.runpp(net)  # FORBIDDEN: mutating net
     net.res_bus
     return
 
@@ -285,7 +285,7 @@ def _():
 
 @app.cell
 def _(net, top):
-    net.switch.closed.at[0] = True
+    net.switch.closed.at[0] = True  # FORBIDDEN: mutating net
     top.unsupplied_buses(net)
     return
 
@@ -340,8 +340,8 @@ def _():
 
 @app.cell
 def _(net):
-    net.ext_grid["s_sc_max_mva"] = 100
-    net.ext_grid["rx_max"] = 0.1
+    net.ext_grid["s_sc_max_mva"] = 100  # FORBIDDEN: mutating net
+    net.ext_grid["rx_max"] = 0.1  # FORBIDDEN: mutating net
     return
 
 
@@ -357,7 +357,7 @@ def _():
 def _(net):
     import pandapower.shortcircuit as sc
 
-    sc.calc_sc(net, case="max", ip=True, r_fault_ohm=2.0)
+    sc.calc_sc(net, case="max", ip=True, r_fault_ohm=2.0)  # FORBIDDEN: mutating net
     return
 
 
