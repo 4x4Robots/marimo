@@ -6,10 +6,15 @@ I never liked Jupyter notebooks because they're not reproducible (you can run ce
 
 # The problem
 
-[Varible mutations are not tracked](https://docs.marimo.io/guides/reactivity/#variable-mutations-are-not-tracked)
+[Variable mutations are not tracked](https://docs.marimo.io/guides/reactivity/#variable-mutations-are-not-tracked)
 
 [Execution Order](https://docs.marimo.io/getting_started/key_concepts/#editing-notebooks)
 
+Maybe I'm just using marimo in the wrong way and haven't found the trick how to work with mutating dataframes.
+Especially in the experimenting and exploration/learning phase. Later I can easily move the whole setup into functions
+and create the required `net` instance in only one cell.
+
+# Available solutions
 
 ## 1st Method - marimo convert
 I ran the marimo converter for the original [minimal example from pandapower](https://github.com/e2nIEE/pandapower/blob/7b6b2bf058525143ff590f57d0e8dce0fcef3f66/tutorials/minimal_example.ipynb):
@@ -38,6 +43,8 @@ But worse, this is not the normal usage for a `net` object in pandapower, where 
 So you would learn contra to the best practices for the pandapower package.
 
 For this version see: `[minimap_example_redefining.py](https://github.com/4x4Robots/marimo/blob/7a818a73bc5bb96e320620ad92d5f6bda9102638/examples/third_party/pandapower/minimal_example_redefining_variables.py)`
+
+<image src="https://github.com/4x4Robots/marimo/blob/4x4Robots/pandapower_tutorials/examples/third_party/pandapower/public/Example_Redefining_Variables.png"></image>
 
 ## 3rd Method - manual DAG
 
