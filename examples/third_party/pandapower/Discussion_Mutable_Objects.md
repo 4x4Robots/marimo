@@ -42,16 +42,19 @@ This can become quite confusing (see `net_switches_created` and `net_switches_po
 But worse, this is not the normal usage for a `net` object in pandapower, where it should be mutated.
 So you would learn contra to the best practices for the pandapower package.
 
-For this version see: `[minimap_example_redefining.py](https://github.com/4x4Robots/marimo/blob/7a818a73bc5bb96e320620ad92d5f6bda9102638/examples/third_party/pandapower/minimal_example_redefining_variables.py)`
+For this version see: [minimap_example_redefining.py](https://github.com/4x4Robots/marimo/blob/7a818a73bc5bb96e320620ad92d5f6bda9102638/examples/third_party/pandapower/minimal_example_redefining_variables.py)
 
-<image src="https://github.com/4x4Robots/marimo/blob/4x4Robots/pandapower_tutorials/examples/third_party/pandapower/public/Example_Redefining_Variables.png"></image>
+<image src="https://github.com/4x4Robots/marimo/blob/4x4Robots/pandapower_tutorials/examples/third_party/pandapower/public/Example_Redefining_Variables.png" width="600"></image>
 
 ## 3rd Method - manual DAG
 
 When digging deeper into the [marimo documentation] there is a mention to manually define your DAG.
 
+Exploiting the marimo reactivity feature by defining additional global variables.
+
 [Best practices -> Minimize mutations](https://docs.marimo.io/guides/best_practices/)
 
 [Marimo Docs -> Why I can't redefine variables](https://docs.marimo.io/guides/understanding_errors/multiple_definitions/#why-cant-i-redefine-variables)
 
+<image src="https://github.com/4x4Robots/marimo/blob/4x4Robots/pandapower_tutorials/examples/third_party/pandapower/public/Example_Manual_DAG.png" width="600"></image>
 
