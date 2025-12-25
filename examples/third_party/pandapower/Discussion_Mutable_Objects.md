@@ -1,4 +1,5 @@
 
+I'm probably missing something, but I nevertheless wanted to share my solutions because I used so much time for them.
 
 
 I'm learned pandapower using their interactive Jupyter notebook tutorials.
